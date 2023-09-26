@@ -25,8 +25,13 @@ export class UsersController {
   ) {}
 
   @Post('/signup')
-  async createUser(@Body() body: CreateUserDto) {
-    await this.authService.signup(body.email, body.password);
+  createUser(@Body() body: CreateUserDto) {
+    return this.authService.signup(body.email, body.password);
+  }
+
+  @Post('/signin')
+  signIn(@Body() body: CreateUserDto) {
+    return this.authService.signin(body.email, body.password);
   }
 
   @Get('/:id')
