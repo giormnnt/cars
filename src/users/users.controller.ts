@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   NotFoundException,
   Param,
   Patch,
@@ -16,6 +17,8 @@ import { UpdateUserDto } from './DTOs/update-user-dto';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { UserDto } from './DTOs/user.dto';
 import { AuthService } from './auth.service';
+import { CurrentUser } from './decorators/current-user-decorator';
+import { User } from './user.entity';
 
 @Controller('auth')
 @Serialize(UserDto)
@@ -24,6 +27,11 @@ export class UsersController {
     private userService: UsersService,
     private authService: AuthService,
   ) {}
+
+  @Get('/currentUser')
+  currentUser(@CurrentUser() user: User) {
+    return user;
+  }
 
   @Post('/signup')
   async createUser(@Body() body: CreateUserDto, @Session() session: any) {
@@ -40,9 +48,9 @@ export class UsersController {
   }
 
   @Post('/signout')
+  @HttpCode(200)
   signOut(@Session() session: any) {
     session.userId = null;
-    return JSON.stringify({ msg: 'Successfuly Logged Out' });
   }
 
   @Get('/:id')

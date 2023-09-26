@@ -16,6 +16,9 @@ Content-Type: application/json
   "password": "123Qwe1!"
 }
 
+### Get current user
+GET http://localhost:3000/auth/currentUser
+
 ### Sign out user
 POST  http://localhost:3000/auth/signout
 
