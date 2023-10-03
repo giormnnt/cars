@@ -30,6 +30,11 @@ export class ReportsController {
     return this.reportsService.create(body, user);
   }
 
+  @Get()
+  getEstimate(@Query() query: GetEstimateDto) {
+    return this.reportsService.generateEstimate(query);
+  }
+
   @Patch('/:id')
   @UseGuards(AdminGuard)
   approveReport(@Param('id') id: string, @Body() body: ApproveReportDto) {

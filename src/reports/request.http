@@ -19,3 +19,6 @@ Content-Type: application/json
 {
   "approved": true
 }
+
+### Get an estimate for an existing car
+GET http://localhost:3000/reports?creator=ford&model=mustang&lng=23&lat=10&mileage=20000&year=1960
